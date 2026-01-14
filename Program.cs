@@ -2,12 +2,14 @@
 {
     internal class Program
     {
+        public static Player Player1 = new Player();
         static void Main(string[] args)
         {
-            Player Player1 = new Player();
+            
+            
             int usersFirstChoice;
             bool hasCellKey = false;
-
+           
             bool rejectsPlayerName = true;
             
             while (rejectsPlayerName == true)
@@ -59,11 +61,11 @@
                     }
                     Console.WriteLine("");
 
-                    Console.WriteLine("\n Skriv 1 för att leta under sängen \n Skriv 2 för att leta runt handfatet \n Skriv 3 för att leta utanför fönstret");
+                    Console.WriteLine("\n Skriv 1 för att leta under sängen \n Skriv 2 för att leta runt handfatet \n Skriv 3 för att leta utanför fönstret \n Skriv 4 för att runka");
                     Console.WriteLine("");
 
                     bool success = int.TryParse(Console.ReadLine(), out usersFirstChoice); //LÄR DIG DENNA!!!
-                    if (!success || usersFirstChoice < 1 || usersFirstChoice > 3)
+                    if (!success || usersFirstChoice < 1 || usersFirstChoice > 4)
                     {
                         Console.WriteLine("Snälla windows jag behöver detta, min kod är ganska ass");
                     }
@@ -84,6 +86,13 @@
                         {
                             Console.WriteLine("Försök igen?");
                         } 
+                    }
+                    else if (usersFirstChoice == 4)
+                    {
+                        Console.WriteLine("Du sätter dig ner på sängen och runkar i 20 minuter. Jävlar vad länge.");
+                        Console.WriteLine("Spermat ger dig liv. [+10 max hälsa]");
+                        Player1.playerBaseHealth = Player1.playerBaseHealth + 10;
+                        Player1.GainHealth(10);
                     }
                 }
                 else
@@ -136,6 +145,8 @@
             {
                 playerHealth = playerBaseHealth;
             }
+
+            Console.WriteLine("Du känner dig friskare. [+" + healthGained + " hälsa]");
         }
     }
     public class Enemy
@@ -178,7 +189,10 @@
     }
     public class Encounter
     {
+        public bool enemyTurn = false;
+        public bool playerTurn = true;
         private Enemy enemy;
+        public Player player;
         public Encounter(Enemy enemy)
         {
             this.enemy = enemy;
@@ -186,6 +200,11 @@
         public void start()
         {
             Console.WriteLine("En fiende dök upp!");
+          if (playerTurn == true)
+            {
+                
+            }
+          
         }
 
     }
