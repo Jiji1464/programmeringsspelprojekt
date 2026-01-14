@@ -148,6 +148,11 @@
 
             Console.WriteLine("Du känner dig friskare. [+" + healthGained + " hälsa]");
         }
+        public void SimpleAttack1(Enemy enemy)
+        {
+            Console.WriteLine("Du slog fienden!");
+            enemy.TakeDamage(10);
+        }
     }
     public class Enemy
     {
@@ -182,6 +187,11 @@
         }
 
         public void SimpleAttack1(Player player1)
+        {
+            Console.WriteLine(enemyName + " sparkade dig hårt!");
+            player1.TakeDamage(10);
+        }
+        public void SimpleAttack2(Player player1)
         {
             Console.WriteLine(enemyName + " sparkade dig hårt!");
             player1.TakeDamage(10);
