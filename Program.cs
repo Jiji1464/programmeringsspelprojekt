@@ -8,8 +8,6 @@ namespace programmeringsspelprojekt
         public static Player Player1 = new Player();
         static void Main(string[] args)
         {
-            
-            
             int usersFirstChoice;
             bool hasCellKey = false;
            
@@ -41,11 +39,9 @@ namespace programmeringsspelprojekt
                     Console.WriteLine("Du måste skriva Y eller N");
                     Console.WriteLine("");
                 }
-  
             }
- 
             Player1.playerHealth = Player1.playerBaseHealth;
-            
+            Console.Clear();
             Console.WriteLine("Du har vaknat i en cell. Kall luft blåser in från ett litet fönster, och snöflingor ladnar vid dina fötter. Du måste ta dig ut på något sätt! Du var ju falskt anklagad, naturligtvis! Varför skulle *du* någonsin råna tre banker i rad?! Det kunde ju inte hänt???!");
             Console.WriteLine("Det finns bara en säng, ett handfat och det kalla, öppna fönstret. Vad gör du?");
             Console.WriteLine("");
@@ -53,15 +49,7 @@ namespace programmeringsspelprojekt
             {
                 if (Player1.playerHealth > 0)
                 {
-                    Console.WriteLine("PLayer: \"" + Player1.playerName + "\"");
-                    if (Player1.playerHealth == Player1.playerBaseHealth)
-                    {
-                        Console.WriteLine("Player health: " + Player1.playerHealth + "/" + Player1.playerBaseHealth + " (MAX!!)");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Player health: " + Player1.playerHealth + "/" + Player1.playerBaseHealth);
-                    }
+                    Player1.PlayerStatPrint();
                     Console.WriteLine("");
 
                     Console.WriteLine("\n Skriv 1 för att leta under sängen \n Skriv 2 för att leta runt handfatet \n Skriv 3 för att leta utanför fönstret");
@@ -78,7 +66,7 @@ namespace programmeringsspelprojekt
                     }
                     else if (usersFirstChoice == 2)
                     {
-                        Console.WriteLine("du valde val 2 och hittade nyckeln!! wow du vann!");
+                        Console.WriteLine("Bakom vattenkranan har en tidigare fånge klämt fast något. Det ser ut som en krokig bit metall, som verkar passa celldörrens nyckelhål ganska bra.");
                         hasCellKey = true;
                     }
                     else if (usersFirstChoice == 3)
@@ -89,24 +77,16 @@ namespace programmeringsspelprojekt
                         {
                             Console.WriteLine("Försök igen?");
                         } 
-                    }
-                  
+                    }         
                 }
                 else
                 {
                     break; 
                 }
             }
-           
-            if (Player1.playerHealth <= 0)
-            {
-                Console.WriteLine("Du är död.");
-                    return;
-            }
+            
             Room room1 = new Room(Player1);
             room1.start();
-
-
         }
     }
     public class Player
@@ -114,7 +94,6 @@ namespace programmeringsspelprojekt
         public string playerName;
         public int playerHealth;
         public int playerBaseHealth = 50;
-
         public void PlayerStatPrint()
         {
             Console.WriteLine("PLayer: \"" + playerName + "\"");
@@ -144,8 +123,6 @@ namespace programmeringsspelprojekt
             {
                 PlayerStatPrint();
             }
-
-
         }
 
         public void GainHealth(int healthGained)
@@ -253,10 +230,7 @@ namespace programmeringsspelprojekt
                 Console.WriteLine("Välj vad du ska göra");
                 Console.WriteLine("1. Slå fienden \n 2. Sparka fienden \n 3. Försök att undvika fiendens attack (+15% chans att fiendens attack missar)");
             }
-          
-          
         }
-
     }
     public class Room
     {
@@ -264,18 +238,13 @@ namespace programmeringsspelprojekt
         public Room(Player player)
         { this.Player = player; }
         public bool hasEnemy;
-        
-       
         public string roomSize;
         public int numberOfExits;
         public string ExitsArePlural;
         public bool hasRoomKey = false;
 
-       
-       
         public void start()
         {
-            
             Random rand = new Random();
 
             numberOfExits = rand.Next(0, 11);
@@ -296,12 +265,9 @@ namespace programmeringsspelprojekt
             {
                 ExitsArePlural = "utgång";
             }
-            
 
             int keyRequired = rand.Next(0, 3);
             int hasEnemyChecker = rand.Next(0, 3);
-            
-
 
             Console.WriteLine("Du tar dig in i det nya rummet");
             Console.WriteLine("Rummet är " + roomSize + " och har " + numberOfExits + " " + ExitsArePlural);
@@ -310,7 +276,6 @@ namespace programmeringsspelprojekt
                 Console.WriteLine("Det verkar som om dörren är låst och du behöver en nyckel.");
 
             }
-            
             if(hasEnemyChecker > 1)
             {
                 
